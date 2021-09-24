@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
 
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, signOut } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -42,48 +42,58 @@ const Profile: React.FC = () => {
           email: Yup.string()
             .required('E-mail é obrigatório')
             .email('Digite um e-mail válido'),
-          old_password: Yup.string(),
-          password: Yup.string().when('old_password', {
-            is: val => !!val.length,
-            then: Yup.string()
-              .min(6, 'No mínimo 6 dígitos')
-              .required('Campo obrigatório'),
-            otherwise: Yup.string(),
-          }),
-          password_confirmation: Yup.string()
-            .when('old_password', {
-              is: val => !!val.length,
-              then: Yup.string().required('Campo obrigatório'),
-              otherwise: Yup.string(),
-            })
-            .oneOf([Yup.ref('password'), null], 'Confirmação incorreta'),
+          // old_password: Yup.string(),
+          // password: Yup.string().when('old_password', {
+          //   is: val => !!val.length,
+          //   then: Yup.string()
+          //     .min(6, 'No mínimo 6 dígitos')
+          //     .required('Campo obrigatório'),
+          //   otherwise: Yup.string(),
+          // }),
+          // password_confirmation: Yup.string()
+          //   .when('old_password', {
+          //     is: val => !!val.length,
+          //     then: Yup.string().required('Campo obrigatório'),
+          //     otherwise: Yup.string(),
+          //   })
+          //   .oneOf([Yup.ref('password'), null], 'Confirmação incorreta'),
         });
 
         await schema.validate(data, { abortEarly: false });
 
+        // const {
+        //   name,
+        //   email,
+        //   old_password,
+        //   password,
+        //   password_confirmation,
+        // } = data;
+
+        // const formData = {
+        //   name,
+        //   email,
+        //   ...(old_password
+        //     ? {
+        //         old_password,
+        //         password,
+        //         password_confirmation,
+        //       }
+        //     : {}),
+        // };
+
         const {
           name,
-          email,
-          old_password,
-          password,
-          password_confirmation,
+          email
         } = data;
 
         const formData = {
           name,
-          email,
-          ...(old_password
-            ? {
-                old_password,
-                password,
-                password_confirmation,
-              }
-            : {}),
+          email
         };
 
-        const response = await api.put('/profile', formData);
+        const response = await api.put('/providers/updateProfile', formData);
 
-        updateUser(response.data);
+        signOut();
 
         history.push('/dashboard');
 
@@ -174,7 +184,7 @@ const Profile: React.FC = () => {
 
           <Input name="email" icon={FiMail} placeholder="E-mail" />
 
-          <Input
+          {/* <Input
             containerStyle={{ marginTop: 24 }}
             name="old_password"
             icon={FiLock}
@@ -192,7 +202,7 @@ const Profile: React.FC = () => {
             icon={FiLock}
             type="password"
             placeholder="Confirmar senha"
-          />
+          /> */}
 
           <Button type="submit">Confirmar mudanças</Button>
         </Form>

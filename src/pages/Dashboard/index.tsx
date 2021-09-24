@@ -104,6 +104,7 @@ const Dashboard: React.FC = () => {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [avaliacao, setAvaliacao] = useState(0);
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
@@ -181,6 +182,18 @@ const Dashboard: React.FC = () => {
         setAppointments(appointmentsFormatted);
       });
   }, [selectedDate]);
+
+  useEffect(() => {
+    api
+      .get('/providers/mediaAvaliacao/' + user.id)
+      .then(response => {
+        if(isNaN(response.data)){
+          setAvaliacao(0);
+        } else {
+          setAvaliacao(response.data);
+        }
+      });
+  }, []);
 
   useEffect(() => {
     api
@@ -266,7 +279,7 @@ const Dashboard: React.FC = () => {
               </Link> : <Link to="/descricao">
                 <span> <FiEdit  /> Definir descrição</span>
               </Link>}
-              <span>Avaliação: 5/5</span>
+              <span>Avaliação: {avaliacao}/5.0</span>
             </div>
           </S.HeaderProfile>
           <button type="button" onClick={signOut}>
@@ -275,7 +288,7 @@ const Dashboard: React.FC = () => {
         </S.HeaderContent>
         
       </S.Header>
-      {user.roles.includes('ROLE_ADMIN') && <S.Content>
+      {user.roles && user.roles.includes('ROLE_ADMIN') && <S.Content>
         <Link to="/clientes" style={{ minWidth: '100%' }}>
           <Button>
             Listagem de clientes 
@@ -284,7 +297,7 @@ const Dashboard: React.FC = () => {
       </S.Content>}        
       
 
-      <S.Content>
+      {user.roles && !user.roles.includes('ROLE_ADMIN') && <S.Content>
         <S.Schedule>
           <h1>Horários agendados</h1>
           <p>
@@ -476,7 +489,7 @@ const Dashboard: React.FC = () => {
           />
         </S.Calendar>
         
-      </S.Content>
+      </S.Content>}
     </S.Container>
   );
 };
