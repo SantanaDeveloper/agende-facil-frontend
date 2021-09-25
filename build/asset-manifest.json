@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.js": "/painel/static/js/main.1461d991.chunk.js",
+    "main.js.map": "/painel/static/js/main.1461d991.chunk.js.map",
+    "runtime-main.js": "/painel/static/js/runtime-main.b57625a4.js",
+    "runtime-main.js.map": "/painel/static/js/runtime-main.b57625a4.js.map",
+    "static/css/2.23887387.chunk.css": "/painel/static/css/2.23887387.chunk.css",
+    "static/js/2.fd2f2495.chunk.js": "/painel/static/js/2.fd2f2495.chunk.js",
+    "static/js/2.fd2f2495.chunk.js.map": "/painel/static/js/2.fd2f2495.chunk.js.map",
+    "index.html": "/painel/index.html",
+    "precache-manifest.1321e5e03d20e6c093e43fd1ce752fea.js": "/painel/precache-manifest.1321e5e03d20e6c093e43fd1ce752fea.js",
+    "service-worker.js": "/painel/service-worker.js",
+    "static/css/2.23887387.chunk.css.map": "/painel/static/css/2.23887387.chunk.css.map",
+    "static/js/2.fd2f2495.chunk.js.LICENSE.txt": "/painel/static/js/2.fd2f2495.chunk.js.LICENSE.txt",
+    "static/media/logar-background.jpg": "/painel/static/media/logar-background.2330990a.jpg",
+    "static/media/logo.svg": "/painel/static/media/logo.f426120e.svg",
+    "static/media/sign-in-background.png": "/painel/static/media/sign-in-background.6eac314f.png",
+    "static/media/sign-up-background.png": "/painel/static/media/sign-up-background.c4d8f988.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b57625a4.js",
+    "static/css/2.23887387.chunk.css",
+    "static/js/2.fd2f2495.chunk.js",
+    "static/js/main.1461d991.chunk.js"
+  ]
+}

@@ -9,7 +9,7 @@ import AppProvider from './hooks';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={'/painel'}>
       <AppProvider>
         <Routes />
       </AppProvider>
